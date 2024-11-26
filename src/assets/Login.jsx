@@ -22,7 +22,7 @@ const Login = () => {
   return (
     <>
       <Navbar />
-      <div className="flex justify-center items-center h-[100vh] bg-gray-200">
+      <div className="flex justify-center items-center h-[100vh] bg-gray-200 shadow-lg">
         <div className="bg-white p-8 rounded shadow-lg w-full max-w-md">
           <h2 className="text-2xl font-semibold mb-4">Login</h2>
           <form onSubmit={handleLogin}>
@@ -34,7 +34,7 @@ const Login = () => {
                 type="text"
                 id="username"
                 placeholder="Username"
-                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-green-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-deepsky"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
@@ -47,14 +47,14 @@ const Login = () => {
                 type="password"
                 id="password"
                 placeholder="Password"
-                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-green-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-deepsky"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <button
               type="submit"
-              className="w-full bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+              className="w-full bg-deepsky text-white px-4 py-2 rounded-xl hover:bg-deepsky"
             >
               Login
             </button>

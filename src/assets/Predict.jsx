@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useUser } from "../context/UserContext"; // Ensure the path is correct
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 const Predict = () => {
   const { user } = useUser(); // Get user info from context
   const [symptoms, setSymptoms] = useState(Array(5).fill("Select Symptom")); // State for selected symptoms
   const [predictionResult, setPredictionResult] = useState(""); // State to store the prediction result
+  const navigate = useNavigate(); // Initialize navigate
+  const [isRedirecting, setIsRedirecting] = useState(false); // Track if we're redirecting
 
   // Symptom-to-disease mapping (each disease has 5 symptoms)
   const diseases = [
@@ -70,6 +73,12 @@ const Predict = () => {
         : "No exact match found. Please consult a doctor for a precise diagnosis.";
 
     setPredictionResult(result); // Set the prediction result
+
+    // Start the 10-second timer to redirect
+    setIsRedirecting(true);
+    setTimeout(() => {
+      navigate("/"); // Redirect to the home page after 10 seconds
+    }, 5000);
   };
 
   // Options for symptom dropdown
@@ -96,12 +105,12 @@ const Predict = () => {
   ];
 
   return (
-    <div className="flex flex-col items-center mt-20">
-      <h1 className="text-2xl font-bold mb-4">
-        Welcome back, {user ? user.username : "Guest"} 👋
+    <div className="flex flex-col items-center">
+      <h1 className="text-2xl font-bold mt-24 mb-4">
+        Welcome, {user ? user.username : "Guest"} 👋
       </h1>
 
-      <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
+      <div className="bg-gray-100 p-8 rounded shadow-md w-full max-w-md">
         <h2 className="text-xl font-semibold mb-4">
           Select Your Symptoms, {user ? user.username : "Guest"}
         </h2>
@@ -128,7 +137,7 @@ const Predict = () => {
 
           <button
             type="submit"
-            className="w-full bg-green-500 text-white py-2 rounded hover:bg-green-600"
+            className="w-full bg-deepsky text-white py-2 rounded hover:bg-deepsky"
           >
             Predict
           </button>
@@ -141,6 +150,8 @@ const Predict = () => {
             <p>{predictionResult}</p>
           </div>
         )}
+
+        
       </div>
     </div>
   );
